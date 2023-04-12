@@ -10,36 +10,40 @@
  */
 char *str_concat(char *s1, char *s2)
 {
-	int i, j, l, m, len1, len2;
+	int len1, len2, i, j, l, m;
 	char *p;
+	int s = 0;
 
-	for (i = 0; s1[i] != '\0'; i++)
-	{
-		len1 = i + 1;
-	}
-	if (s1[0] == '\0')
+	if (s1 == NULL || s1[0] == '\0')
 		len1 = 1;
-	else if (s1 == NULL)
-		len1 = 0;
-
-	for (j = 0; s2[j] != '\0'; j++)
+	else
 	{
-		len2 = j + 1;
+		for (i = 0; s1[i] != '\0'; i++)
+		{
+			len1 = i + 1;
+		}
 	}
-	if (s2[0] == '\0')
+	if (s2 == NULL || s2[0] == '\0')
 		len2 = 1;
-	else if (s2 == NULL)
-		len2 = 0;
-	p = malloc((len1 + len2 + 1) * sizeof(char));
+	else
+	{
+		for (j = 0; s2[j] != '\0'; j++)
+		{
+			len2 = j + 1;
+		}
+	}
+	p = malloc((sizeof(char) * (len1 + len2)) + 1);
 	if (p == NULL)
 		return (NULL);
-	for (l = 0; l < len1; l++)
+	if (s1 != NULL)
+	for (l = 0; s1[l] != '\0'; l++, s++)
 	{
 		p[l] = s1[l];
 	}
-	for (m = 0; m < len2; m++)
+	if (s2 != NULL)
+	for (m = 0; s2[m] != '\0'; m++, s++)
 	{
-		p[i + m] = s2[m];
+		p[s] = s2[m];
 	}
 	return (p);
 	free(p);
