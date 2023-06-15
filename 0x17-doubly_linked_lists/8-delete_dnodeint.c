@@ -20,7 +20,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		/*trav->next = NULL;*/
 		return (1);
 	}
-	while (trav)
+	while (trav->next)
 	{
 		if (i == index)
 		{
@@ -31,11 +31,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		trav = trav->next;
 		i++;
 	}
-	if (trav->next == NULL)
-	{
-		trav->prev->next = NULL;
-		return (1);
-	}
-	return (-1);
+	trav->prev->next = NULL;
+	return (1);
 }
 
