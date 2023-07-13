@@ -113,6 +113,7 @@ void add_to_sorted_list(shash_table_t *htable, shash_node_t *node)
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
 	unsigned long int idx;
+	char *new_value;
 	shash_node_t *temp;
 	shash_node_t *new_node;
 
@@ -129,8 +130,11 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	{
 		if (strcmp(temp->key, key) == 0)
 		{
+			new_value = strdup(value);
+			if (!new_value)
+				return (0);
 			free(temp->value);
-			temp->value = strdup(value);
+			temp->value = new_value;
 			return (1);
 		}
 		temp = temp->next;
