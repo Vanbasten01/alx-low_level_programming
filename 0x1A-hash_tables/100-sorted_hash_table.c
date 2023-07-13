@@ -29,7 +29,41 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 	return (sht);
 }
+/**
+ *
+ *
+ *
+ *
+ */
+shash_node_t *make_shash_node(const char *key, const char *value)
+{
+	shash_node_t *shn;
 
+	/* Allocate memory for the new hash node */
+	shn = malloc(sizeof(shash_node_t));
+	if (shn == NULL)
+		return (NULL);
+
+	/* Duplicate and store the key */
+	shn->key = strdup(key);
+	if (shn->key == NULL)
+	{
+		free(shn);
+		return (NULL);
+	}
+
+	/* Duplicate and store the value */
+	shn->value = strdup(value);
+	if (shn->value == NULL)
+	{
+		free(shn->key);
+		free(shn);
+		return (NULL);
+	}
+
+	shn->next = shn->snext = shn->sprev = NULL;
+	return (shn);
+}
 /**
  *
  *
@@ -82,7 +116,10 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	shash_node_t *temp;
 	shash_node_t *new_node;
 
-	if (!ht || !key)
+	/*if (!ht || !key)
+		return (0);*/
+	if (ht == NULL || ht->array == NULL || ht->size == 0 ||
+		key == NULL || strlen(key) == 0 || value == NULL)
 		return (0);
 
 	idx = key_index((const unsigned char *)key, ht->size);
@@ -98,6 +135,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		}
 		temp = temp->next;
 	}
+	new_node = make_shash_node(key, value);
+	/*
 	new_node = malloc(sizeof(shash_node_t));
 	if (!new_node)
 		return (0);
@@ -114,7 +153,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		free(new_node);
 		return (0);
 	}
-	new_node->snext = new_node->sprev = NULL;
+	new_node->snext = new_node->sprev = NULL;*/
 	new_node->next = ht->array[idx];
 	ht->array[idx] = new_node;
 	add_to_sorted_list(ht, new_node);
