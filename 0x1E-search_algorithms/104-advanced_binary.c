@@ -57,7 +57,8 @@ int finder(int *array, int left, int right, int value)
 }
 
 /**
- *binary_search - Searches for a value in a sorted array using binary search.
+ *advanced_binary - Searches for a value in a sorted array
+ *using advanced binary search.
  *@array: a pointer to the array to search in.
  *@size: size of the array.
  *@value: value to search for.
