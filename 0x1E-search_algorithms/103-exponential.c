@@ -30,13 +30,12 @@ void print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * exponential_search - Searches for a value in an array using
- *                     exponential search algorithm.
- * @array: Pointer to the sorted array to search in.
- * @size: The number of elements in the array.
- * @value: The value to search for.
- *
- * Return: The index where the value is found, or -1 if not found.
+ *exponential_search - Searches for a value in an array using
+ *"exponential search algorithm".
+ *@array: a pointer to the sorted array to search in.
+ *@size: the number of elements in the array.
+ *@value: the value to search for.
+ *Return: the index where the value is found, or -1 if not found.
  */
 int exponential_search(int *array, size_t size, int value)
 {
