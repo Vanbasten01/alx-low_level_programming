@@ -1,51 +1,34 @@
 #include "search_algos.h"
-
 /**
- * finder - Helper function for binary search
- * @array: Pointer to the array to search in
- * @left: Left index of the search interval
- * @right: Right index of the search interval
- * @value: Value to search for
- *
- * Return: Index of the value in the array, or -1 if not found
- */
-int finder(int *array, int left, int right, int value)
-{
-	int mid, i;
-
-	if (left > right)
-		return (-1);
-
-	printf("Searching in array: ");
-	for (i = left; i < right; i++)
-		printf("%d, ", i);
-	printf("%d\n", right);
-
-
-	mid = (left + right) / 2;
-
-	if (array[mid] == value)
-		return (mid);
-
-	if (array[mid] < value)
-		return (finder(array, mid + 1, right, value));
-
-	return (finder(array, left, mid - 1, value));
-}
-
-/**
- * binary_search - Searches for a value in a sorted array using binary search
- * @array: Pointer to the array to search in
- * @size: Size of the array
- * @value: Value to search for
- *
- * Return: Index of the value in the array, or -1 if not found
+ *binary_search - Searches for a value in a sorted array using binary search.
+ *@array: a pointer to the array to search in.
+ *@size: the size of the array.
+ *@value: the value to search for.
+ *Return: the index of the value in the array otherwise -1.
  */
 int binary_search(int *array, size_t size, int value)
 {
-	if (array == NULL)
+	size_t left, right, i, mid;
+
+	if (!array)
 		return (-1);
 
-	return (finder(array, 0, (int)size - 1, value));
-}
+	left = 0;
+	right = size - 1;
 
+	while (left <= right)
+	{
+		printf("Searching in array: ");
+		for (i = left; i < right; i++)
+			printf("%d, ", array[i]);
+		printf("%d\n", array[i]);
+		mid = left + (right - left) / 2;
+		if (array[mid] == value)
+			return (mid);
+		if (array[mid] < value)
+			left = mid + 1;
+		else
+			right = mid - 1;
+	}
+	return (-1);
+}
